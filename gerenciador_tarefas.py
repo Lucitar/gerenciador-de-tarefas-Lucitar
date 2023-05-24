@@ -24,7 +24,6 @@ def adicionar_tarefa(prioridade: bool, tarefa: str):
     # do tipo ValueError com a mensagem "Prioridade inválida"
     # Caso a tarefa já exista na lista, levante uma exceção do tipo ValueError
     # com a mensagem "Tarefa já existe"
-    print("------------------", lista_de_tarefas)
     if not (prioridade == True or prioridade == False):
         raise ValueError("Prioridade inválida")
 
@@ -49,7 +48,12 @@ def remove_tarefas(índices: tuple[int]):
     # TODO: coloque o código aqui para remover um tarefa na lista
     # Caso a tarefa não exista na lista, levante uma exceção do tipo ValueError
     # com a mensagem "Tarefa não existe"
+    índices = sorted(índices, reverse=True)
+    if len(lista_de_tarefas) == 0:
+        raise ValueError("Tarefa não existe")
     for indice in índices:
+        if(indice > len(lista_de_tarefas) - 1):
+            raise ValueError("Tarefa não existe")
         if(lista_de_tarefas[indice]):
             lista_de_tarefas.pop(indice)
         else:
@@ -101,8 +105,10 @@ def ordena_por_prioridade():
         else:
             sem_prioridade.append(item)
     # sorted; dict(sorted(people.items(), key=lambda item: item[1]))
-    prioridade.sort()
-    sem_prioridade.sort()
+    #prioridade.sort()
+    #sem_prioridade.sort()
+    prioridade = sorted(prioridade, key=lambda dicionario: dicionario['tarefa'])
+    sem_prioridade = sorted(sem_prioridade, key=lambda dicionario: dicionario['tarefa'])
     lista_de_tarefas.clear()
     for item in prioridade:
         lista_de_tarefas.append(item)
