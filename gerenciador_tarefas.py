@@ -3,6 +3,9 @@ Modulo que implementa um gerenciador de tarefas
 """
 
 
+import time
+
+
 lista_de_tarefas: list[dict[str]] = [
     {"prioridade": True, "tarefa": "Estudar Python"},
     {"prioridade": False, "tarefa": "Tomar banho"},
@@ -24,13 +27,13 @@ def adicionar_tarefa(prioridade: bool, tarefa: str):
     # do tipo ValueError com a mensagem "Prioridade inválida"
     # Caso a tarefa já exista na lista, levante uma exceção do tipo ValueError
     # com a mensagem "Tarefa já existe"
-    if not (prioridade == True or prioridade == False):
-        raise ValueError("Prioridade inválida")
-
+    
     for item in lista_de_tarefas:
         if(tarefa == item["tarefa"]):
             raise ValueError("Tarefa já existe")
 
+    if (not (prioridade == True or prioridade == False)):
+        raise ValueError("Prioridade inválida")
     lista_de_tarefas.append({"prioridade": prioridade, "tarefa": tarefa})
     return 0
     #raise NotImplementedError("Adicionar tarefas não implementado")
